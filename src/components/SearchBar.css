@@ -1,0 +1,71 @@
+/* SearchBar.css */
+.search-form {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+  }
+  
+  .search-container {
+    position: relative;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 2.5rem;
+    background-color: #ddd;
+    transition: width 0.4s ease-in-out;
+    cursor: pointer;
+  }
+  
+  .search-container:hover,
+  .search-container:focus-within {
+    width: 18rem; /* Adjust the width as needed */
+  }
+  
+  .search-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0 2.5rem 0 1rem; /* Padding right is the size of the container */
+    border: none;
+    border-radius: 2.5rem;
+    outline: none;
+    font-size: 1rem;
+    background: none;
+    color: #333;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+  }
+  
+  .search-container:hover .search-input,
+  .search-container:focus-within .search-input {
+    opacity: 1;
+  }
+  
+  .search-icon {
+    position: absolute;
+    top: 50%;
+    right: 0.5rem; /* Positioned on the right, with a little padding */
+    transform: translateY(-50%);
+    border: none;
+    background: none;
+    font-size: 1.5rem;
+    color: #333;
+    cursor: pointer;
+    outline: none;
+    transition: color 0.3s;
+  }
+  
+  .search-input::placeholder {
+    color: #666;
+  }
+  
+  .search-input:focus {
+    padding-right: 2.5rem; /* Ensure padding right is consistent */
+  }
+  
+  .search-input:focus + .search-icon,
+  .search-container:hover .search-icon {
+    color: #1e40af; /* Highlight color when active/hover */
+  }
+  
