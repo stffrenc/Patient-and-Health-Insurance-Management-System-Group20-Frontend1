@@ -22,6 +22,7 @@ const LandingPage = () => {
             >
               New User? Register Here!
             </button>
+            //additions
           </div>
         </div>
       </div>
