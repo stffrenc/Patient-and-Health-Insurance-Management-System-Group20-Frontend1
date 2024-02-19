@@ -5,15 +5,15 @@ const LandingPage = () => {
   return (
     <>
       <Navbar />
-      <div className="flex justify-center items-center h-screen p-4">
-        <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-[250px] w-full max-w-4xl mx-auto">
+      <div className="flex justify-around items-center h-screen p-4">
+        <div className="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-[80px] w-full max-w-4xl mx-auto">
           <img
             src="https://www.regionalonehealth.org/wp-content/uploads/2020/11/Appendix-6.jpg"
-            className="w-[800px]  h-auto rounded-xl"
+            className="w-[80%] ml-[105px] h-auto rounded-xl"
             alt="Patient and doctor"
           />
-          <div className="flex flex-col items-center gap-5  p-4">
-            <h1 className="text-[45px] w-[450px] text-[#3C3633] text-center font-bold">
+          <div className="flex flex-col items-center  p-4">
+            <h1 className="text-[45px] w-[450px] text-[#3C3633] mb-7 text-center font-bold">
               Welcome to Patient and Insurance Management!
             </h1>
             <button
@@ -22,7 +22,7 @@ const LandingPage = () => {
             >
               New User? Register Here!
             </button>
-            //additions
+            
           </div>
         </div>
       </div>
