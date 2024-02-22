@@ -1,21 +1,47 @@
 import React, { useState } from "react";
+import { auth } from "../../../../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useSnackbar } from "notistack";
 
 const SignupForm = () => {
+  const { enqueueSnackbar } = useSnackbar();
+
   const [formData, setFormData] = useState({
     username: "",
     email: "",
     password: "",
     confirmPassword: "",
+    role: "",
   });
+
+  const [error, setError] = useState(null);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (formData.password !== formData.confirmPassword) {
+      setError("Passwords do not match.");
+      return;
+    }
 
-    console.log(formData);
+    try {
+      setError(null);
+
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        formData.email,
+        formData.password
+      );
+
+      enqueueSnackbar(`User succesfully created!`, {
+        variant: "success",
+      });
+    } catch (error) {
+      enqueueSnackbar(`Error: ${error.message}`, { variant: "error" });
+    }
   };
 
   return (
@@ -72,6 +98,21 @@ const SignupForm = () => {
             className="w-full p-4 border rounded-lg bg-gray-50 border-gray-300 focus:ring-[#747264] focus:border-[#747264]"
             required
           />
+
+          <select
+            name="role"
+            onChange={handleChange}
+            value={formData.role}
+            className="w-full p-4 border rounded-lg bg-gray-50 border-gray-300 focus:ring-[#747264] focus:border-[#747264]"
+            required
+          >
+            <option value="" disabled>
+              Select your role
+            </option>
+            <option value="patient">Patient</option>
+            <option value="doctor">Doctor</option>
+            <option value="insuranceProvider">Insurance Provider</option>
+          </select>
           <button
             type="submit"
             className="w-full p-4 bg-[#747264] text-white rounded-lg hover:bg-[#3C3633]"
@@ -80,6 +121,7 @@ const SignupForm = () => {
           </button>
         </form>
       </div>
+      {error && <p className="text-red-500">{error}</p>}
     </div>
   );
 };
