@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import { auth } from "../../../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useSnackbar } from "notistack";
+import { useNavigate } from 'react-router-dom';
+
 
 const SignupForm = () => {
+  const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
 
   const [formData, setFormData] = useState({
@@ -39,6 +42,16 @@ const SignupForm = () => {
       enqueueSnackbar(`User succesfully created!`, {
         variant: "success",
       });
+
+      if(formData.role === "patient"){
+        navigate("/client")
+      }else if(formData.role === "doctor"){
+        navigate("/doctor")
+      }else if(formData.role === "insuranceProvider"){
+        navigate("/provider")
+      }
+
+
     } catch (error) {
       enqueueSnackbar(`Error: ${error.message}`, { variant: "error" });
     }
