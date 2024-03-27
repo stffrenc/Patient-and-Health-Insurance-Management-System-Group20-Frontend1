@@ -2,12 +2,15 @@ import React, { useState } from "react";
 import { auth } from "../../../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useSnackbar } from "notistack";
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate } from "react-router-dom";
+import { db } from "../../../../firebase";
+import { doc, setDoc } from "firebase/firestore";
+import { useAuth } from "../../../context/AuthContext";
 
 const SignupForm = () => {
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
+  const { registerUser } = useAuth();
 
   const [formData, setFormData] = useState({
     username: "",
@@ -33,27 +36,27 @@ const SignupForm = () => {
     try {
       setError(null);
 
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
+      await registerUser(
         formData.email,
-        formData.password
+        formData.password,
+        formData.role,
+        formData.username
       );
 
       enqueueSnackbar(`User succesfully created!`, {
         variant: "success",
       });
 
-      if(formData.role === "patient"){
-        navigate("/client")
-      }else if(formData.role === "doctor"){
-        navigate("/doctor")
-      }else if(formData.role === "insuranceProvider"){
-        navigate("/provider")
+      if (formData.role === "patient") {
+        navigate("/client");
+      } else if (formData.role === "doctor") {
+        navigate("/doctor");
+      } else if (formData.role === "insuranceProvider") {
+        navigate("/provider");
       }
-
-
     } catch (error) {
       enqueueSnackbar(`Error: ${error.message}`, { variant: "error" });
+      setError(error.message);
     }
   };
 
