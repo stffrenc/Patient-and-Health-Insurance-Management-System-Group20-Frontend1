@@ -1,6 +1,13 @@
 import React, { useState } from "react";
+import { useAuth } from "../../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { useSnackbar } from "notistack";
 
 const LoginForm = () => {
+  const { signIn } = useAuth();
+  const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -10,10 +17,28 @@ const LoginForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      const userWithRole = await signIn(formData.email, formData.password);
+      enqueueSnackbar("Successfully signed in!", { variant: "success" });
 
-    console.log(formData);
+      switch (userWithRole.role) {
+        case "doctor":
+          navigate("/doctor");
+          break;
+        case "patient":
+          navigate("/client");
+          break;
+        case "insuranceProvider":
+          navigate("/provider");
+          break;
+      }
+    } catch (error) {
+      enqueueSnackbar(`Failed to sign in: ${error.message}`, {
+        variant: "error",
+      });
+    }
   };
 
   return (
