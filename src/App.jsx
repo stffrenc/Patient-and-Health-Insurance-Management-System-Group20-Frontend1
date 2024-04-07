@@ -17,7 +17,6 @@ import BookAppointment from "./client-provider-doctor-views/Client/search/search
 import ViewResults from "./client-provider-doctor-views/Client/search/searchDoctors/ViewResults";
 import SearchDoctor from "./client-provider-doctor-views/Client/search/searchDoctors/searchDoctor";
 import SearchProvider from "./client-provider-doctor-views/Client/search/searchPlans/SearchProvider";
-import ViewProviderProfile from "./client-provider-doctor-views/Client/search/searchPlans/ViewProviderProfile";
 import SearchProviderResults from "./client-provider-doctor-views/Client/search/searchPlans/SearchProviderResults";
 import ProviderProfile from "./client-provider-doctor-views/Client/search/searchPlans/ProviderProfile";
 

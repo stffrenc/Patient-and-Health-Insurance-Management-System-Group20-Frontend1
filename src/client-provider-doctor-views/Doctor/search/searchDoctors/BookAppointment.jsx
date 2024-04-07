@@ -81,7 +81,6 @@ function BookAppointment(){
                     isOpen={isModalOpen}
                     onClose={() => setIsModalOpen(false)}
                     onConfirm={confirmAppointmentRequest}
-                    formData={formData}
                 />
             )}
         

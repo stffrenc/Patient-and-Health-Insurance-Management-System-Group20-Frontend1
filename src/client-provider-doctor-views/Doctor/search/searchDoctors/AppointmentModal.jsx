@@ -1,5 +1,5 @@
 import './appointmentModal.css';
-function AppointmentModal({isOpen, onClose, onConfirm, formData}){
+function AppointmentModal({isOpen, onClose, onConfirm}){
     const handleConfirm = () =>{
         onClose();
     };
@@ -11,8 +11,8 @@ function AppointmentModal({isOpen, onClose, onConfirm, formData}){
                     <p>Thank you, You will be contacted before an appointment is offered.</p>
                 </label>
                 <div className="appointment-modal-actions">
-                    <button onClick={() => onConfirm(formData)}>Confirm</button>
-                    <button onClick={onClose} >Modify Appointment Schedule</button>
+                    <button onClick={onClose}>Confirm</button>
+                    <button onClick={handleConfirm} >Modify Appointment Schedule</button>
                 </div>
             </div>
             </div>
