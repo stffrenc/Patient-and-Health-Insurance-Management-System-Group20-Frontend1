@@ -4,6 +4,7 @@ import {
   signOut,
   onAuthStateChanged,
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth, db } from "../../firebase";
 import {
@@ -59,11 +60,23 @@ export const AuthContextProvider = ({ children }) => {
         username: username,
         lastSignIn: serverTimestamp(),
         role: role,
+        theme: "default",
       });
 
       return user;
     } catch (error) {
       console.error("Error during user registration and data storage", error);
+      throw error;
+    }
+  };
+
+  const resetPassword = async (email) => {
+    try {
+      await sendPasswordResetEmail(auth, email);
+
+      console.log("Password reset email sent successfully");
+    } catch (error) {
+      console.error("Error sending password reset email:", error);
       throw error;
     }
   };
@@ -80,7 +93,9 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, registerUser, logOut, signIn }}>
+    <AuthContext.Provider
+      value={{ user, registerUser, logOut, signIn, resetPassword }}
+    >
       {children}
     </AuthContext.Provider>
   );

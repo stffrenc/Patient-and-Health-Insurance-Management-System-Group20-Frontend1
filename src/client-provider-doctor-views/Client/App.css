@@ -23,7 +23,6 @@ section.hero {
 
 .page-content {
   display: flex;
-  
 }
 .page-content img {
   padding-left: 50px;
@@ -32,7 +31,7 @@ section.hero {
 }
 
 header {
-  background-color: #d2042d;
+  background-color: #886c71;
   color: #fff;
   padding: 20px 0;
   border-bottom: #333 3px solid;
@@ -89,22 +88,19 @@ footer {
 .message {
   display: flex;
   margin-top: 0px;
-
 }
 .message-header {
   border-right: #333 3px solid;
   padding-right: 20px;
   height: 500px;
-  
 }
 
-.message-send{
+.message-send {
   width: 100%;
   margin-top: 100px;
-  
 }
 
-.chatbot{
+.chatbot {
   margin-top: 0px;
 }
 .chatbot-notice {

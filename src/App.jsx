@@ -19,6 +19,7 @@ import SearchDoctor from "./client-provider-doctor-views/Client/search/searchDoc
 import SearchProvider from "./client-provider-doctor-views/Client/search/searchPlans/SearchProvider";
 import SearchProviderResults from "./client-provider-doctor-views/Client/search/searchPlans/SearchProviderResults";
 import ProviderProfile from "./client-provider-doctor-views/Client/search/searchPlans/ProviderProfile";
+import UserDetails from "./components/ui/Profile/UserDetails";
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
               <Route path="/covid-questionnaire" element={<CovidQuestionnaire />} />
               <Route path="/view-provider-profile" element={<SearchProviderResults />} />
               <Route path="/search-provider-results" element={<SearchProviderResults />} />
+              <Route path="/profile-details" element={<UserDetails />}></Route>
             </Routes>
           </Router>
         </SnackbarProvider>
