@@ -10,6 +10,7 @@ import DoctorApp from "./client-provider-doctor-views/Doctor/DoctorApp";
 import ClientApp from "./client-provider-doctor-views/Client/ClientApp";
 import ProviderApp from "./client-provider-doctor-views/Provider/ProviderApp";
 import { AuthContextProvider } from "./context/AuthContext";
+import UserDetails from "./components/ui/Profile/UserDetails";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
               <Route path="/doctor/*" element={<DoctorApp />} />
               <Route path="/client/*" element={<ClientApp />} />
               <Route path="/provider/*" element={<ProviderApp />}></Route>
+              <Route path="/profile-details" element={<UserDetails />}></Route>
             </Routes>
           </Router>
         </SnackbarProvider>

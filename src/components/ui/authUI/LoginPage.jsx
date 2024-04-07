@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
 
 const LoginForm = () => {
-  const { signIn } = useAuth();
+  const { signIn, resetPassword } = useAuth();
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
 
@@ -12,6 +12,20 @@ const LoginForm = () => {
     email: "",
     password: "",
   });
+
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    try {
+      enqueueSnackbar("Check your email for password reset instructions", {
+        variant: "success",
+      });
+      await resetPassword(formData.email);
+    } catch (error) {
+      enqueueSnackbar(`Failed to reset password: ${error.message}`, {
+        variant: "error",
+      });
+    }
+  };
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -55,6 +69,15 @@ const LoginForm = () => {
             Need to make an account?{" "}
             <a href="/register" className="text-[#747264] hover:underline">
               Register
+            </a>
+          </p>
+          <p className="text-gray-600">
+            Forgot your password?{" "}
+            <a
+              onClick={handleResetPassword}
+              className="text-[#747264] hover:underline hover:cursor-pointer"
+            >
+              Reset Your Password
             </a>
           </p>
         </div>

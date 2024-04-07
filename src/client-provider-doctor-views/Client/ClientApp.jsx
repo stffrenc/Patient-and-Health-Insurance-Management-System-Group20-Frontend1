@@ -65,7 +65,11 @@ function ClientApp() {
 
   const { user, logOut } = useAuth();
 
-  const [userInfo, setUserInfo] = useState({ username: "", role: "" });
+  const [userInfo, setUserInfo] = useState({
+    username: "",
+    role: "",
+    theme: "",
+  });
 
   const handleSignOut = () => {
     logOut();
@@ -82,6 +86,7 @@ function ClientApp() {
             setUserInfo({
               username: userDocSnap.data().username,
               role: userDocSnap.data().role,
+              theme: userDocSnap.data().theme,
             });
           } else {
             console.log("No such document!");
@@ -94,9 +99,23 @@ function ClientApp() {
 
     fetchUserInfo();
   }, [user]);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/login");
+    }
+  }, [user]);
   return (
     <div className="App">
-      <header>
+      <header
+        className={`${
+          userInfo.theme == "default"
+            ? "bg-red-600"
+            : userInfo.theme == "alternate"
+            ? "bg-blue-600"
+            : "bg-red-600"
+        }`}
+      >
         <div className="flex">
           <div className="ml-10">
             <h1>MediApp</h1>
@@ -121,9 +140,20 @@ function ClientApp() {
             <a href="/">Logout</a>
           </div> */}
           </div>
+
           <div className="flex mr-10 ml-auto gap-5 w-auto">
-            <div className="h-10 w-auto px-5 bg-white   flex items-center justify-center">
-              <h1 className="text-black text-center ">Email: {user.email}</h1>
+            <div
+              onClick={() => navigate("/profile-details")}
+              className="h-10 w-auto px-5  font-semibold   flex items-center justify-center rounded-lg bg-black  hover:cursor-pointer"
+            >
+              <h1 className="text-white  text-center  ">
+                Your Profile Details
+              </h1>
+            </div>
+            {/* <div className="h-10 w-auto px-5 bg-white   flex items-center justify-center">
+              <h1 className="text-black text-center ">
+                Email: {user && user.email}
+              </h1>
             </div>
             <div className="h-10 w-auto px-5 bg-white flex items-center justify-center  ">
               <h1 className="text-black text-center ">
@@ -132,7 +162,7 @@ function ClientApp() {
             </div>
             <div className="h-10 w-auto px-5 bg-white  flex items-center justify-center ">
               <h1 className="text-black ">Role: {userInfo.role}</h1>
-            </div>
+            </div> */}
             <div className="h-10 w-20 rounded-lg bg-white flex items-center justify-center hover:bg-gray-300 cursor-pointer">
               <button className="text-black" onClick={handleSignOut}>
                 Logout
