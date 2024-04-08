@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import ProviderProfile from "./ProviderProfile";
-import './searchProvider.css';
 
 function SearchProvider() {
   const [searchValue, setSearchValue] = useState('');
@@ -13,6 +12,7 @@ function SearchProvider() {
   const handleSearch = async () => {
     try { 
       const response = await axios.post('http://localhost:8000/search_provider/', { searchValue });
+      console.log("response...",response?.data);
       navigate('/search-provider-results', { state: { results: response?.data} });
       setProviders(response?.data);
     } catch (error) {
@@ -30,9 +30,9 @@ function SearchProvider() {
 }
 
   return (
-    <div className='search-provider-container'>
+    <div className='search-doctor-container'>
       <h1>Find your provider here</h1>
-      {/* <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBdXfBMwiWIx1CX9ZV2d1-7G-1EnE4sR5Jiw&s" /> */}
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBdXfBMwiWIx1CX9ZV2d1-7G-1EnE4sR5Jiw&s" />
       <div className='search-container'>
         <input 
           type="text"
@@ -43,7 +43,9 @@ function SearchProvider() {
         <button type="submit" onClick={handleSearch}>Search</button>
       </div>
       <div className="view-all-providers">
-        <button type="submit" onClick={viewProviderProfile}>View All Insurance Plans</button>
+        {providers.map(provider => (
+          <ProviderProfile key={provider.id} providerData={provider} />
+        ))}
       </div>
 
     </div>

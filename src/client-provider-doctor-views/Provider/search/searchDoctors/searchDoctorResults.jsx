@@ -1,19 +1,20 @@
 import { useLocation } from 'react-router-dom';
-import ProviderProfile from './ProviderProfile';
+import DoctorProfile from './ProfileCard';
+import './searchDoctorResults.css';
 
-function SearchProviderResults() {
+function SearchDoctorResults() {
   const location = useLocation();
   const { results } = location.state; 
   return (
     <div className='search-results-page'>
       <h2>Search Results</h2>
       <div className='results-list'>
-        {results.map((provider, index) => (
-          <ProviderProfile key={index} provider={provider} /> 
+        {results.map((doctor, index) => (
+          <DoctorProfile key={index} doctor={doctor} /> 
         ))}
       </div>
     </div>
   );
 }
 
-export default SearchProviderResults;
+export default SearchDoctorResults;
