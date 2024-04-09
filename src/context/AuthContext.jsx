@@ -45,7 +45,7 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
-  const registerUser = async (email, password, role, username) => {
+  const registerUser = async (email, password, role, username, photoURL) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -61,6 +61,7 @@ export const AuthContextProvider = ({ children }) => {
         lastSignIn: serverTimestamp(),
         role: role,
         theme: "default",
+        photoURL: photoURL,
       });
 
       return user;

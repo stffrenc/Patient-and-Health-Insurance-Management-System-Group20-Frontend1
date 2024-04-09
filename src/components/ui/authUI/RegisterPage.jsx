@@ -3,9 +3,10 @@ import { auth } from "../../../../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
-import { db } from "../../../../firebase";
+import { db, getStorageRef } from "../../../../firebase";
 import { doc, setDoc } from "firebase/firestore";
 import { useAuth } from "../../../context/AuthContext";
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 const SignupForm = () => {
   const navigate = useNavigate();
@@ -22,6 +23,14 @@ const SignupForm = () => {
 
   const [error, setError] = useState(null);
 
+  const [file, setFile] = useState(null);
+
+  const handleImageChange = (e) => {
+    if (e.target.files[0]) {
+      setFile(e.target.files[0]);
+    }
+  };
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -33,6 +42,13 @@ const SignupForm = () => {
       return;
     }
 
+    let photoURL;
+    if (file) {
+      const fileRef = getStorageRef(`profilePictures/${file.name}`);
+      const snapshot = await uploadBytes(fileRef, file);
+      photoURL = await getDownloadURL(snapshot.ref);
+    }
+
     try {
       setError(null);
 
@@ -40,7 +56,8 @@ const SignupForm = () => {
         formData.email,
         formData.password,
         formData.role,
-        formData.username
+        formData.username,
+        photoURL ? photoURL : ""
       );
 
       enqueueSnackbar(`User succesfully created!`, {
@@ -129,6 +146,13 @@ const SignupForm = () => {
             <option value="doctor">Doctor</option>
             <option value="insuranceProvider">Insurance Provider</option>
           </select>
+          <input
+            type="file"
+            name="profilePicture"
+            onChange={handleImageChange}
+            className="w-full p-4 border rounded-lg bg-gray-50 border-gray-300 focus:ring-[#747264] focus:border-[#747264]"
+          />
+
           <button
             type="submit"
             className="w-full p-4 bg-[#747264] text-white rounded-lg hover:bg-[#3C3633]"

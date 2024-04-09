@@ -16,10 +16,10 @@ const LoginForm = () => {
   const handleResetPassword = async (e) => {
     e.preventDefault();
     try {
+      await resetPassword(formData.email);
       enqueueSnackbar("Check your email for password reset instructions", {
         variant: "success",
       });
-      await resetPassword(formData.email);
     } catch (error) {
       enqueueSnackbar(`Failed to reset password: ${error.message}`, {
         variant: "error",

@@ -15,6 +15,7 @@ const UserDetails = () => {
     username: "",
     role: "",
     theme: "",
+    photoURL: "",
   });
 
   useEffect(() => {
@@ -28,6 +29,7 @@ const UserDetails = () => {
               username: userDocSnap.data().username,
               role: userDocSnap.data().role,
               theme: userDocSnap.data().theme,
+              photoURL: userDocSnap.data().photoURL,
             });
           } else {
             console.log("No such document!");
@@ -48,10 +50,16 @@ const UserDetails = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setUserData((prevUserData) => ({
-      ...prevUserData,
-      [name]: value,
-    }));
+    if (name != "role" && name != "email") {
+      setUserData((prevUserData) => ({
+        ...prevUserData,
+        [name]: value,
+      }));
+    } else {
+      enqueueSnackbar(`This cannot be changed`, {
+        variant: "error",
+      });
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -78,7 +86,13 @@ const UserDetails = () => {
       <div className="max-w-md w-full bg-white p-8 border border-gray-300 rounded-lg">
         <div className="mb-6 text-center">
           <div className="flex justify-center">
-            <span className="text-[#747264] text-4xl">👨‍🦱</span>
+            {/* <span className="text-[#747264] text-4xl">👨‍🦱</span> */}
+            <div className="w-[150px] h-[150px] rounded-full overflow-hidden">
+              <img
+                src={userData.photoURL}
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
           <h2 className="text-3xl font-bold text-gray-900 my-4">
             Your Profile Details
@@ -132,7 +146,7 @@ const UserDetails = () => {
             name="role"
             onChange={handleInputChange}
             value={user && userData.role}
-            className="w-full p-4 border rounded-lg bg-gray-50 border-gray-300 focus:ring-[#747264] focus:border-[#747264]"
+            className="w-full p-4 border hover:cursor-not-allowed italic disabled rounded-lg bg-gray-50 border-gray-300 focus:ring-[#747264] focus:border-[#747264]"
             required
           >
             <option value="" disabled>
