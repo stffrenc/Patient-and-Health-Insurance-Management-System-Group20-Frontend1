@@ -9,6 +9,7 @@ import { useAuth } from "../../context/AuthContext.jsx";
 import { db } from "../../../firebase.js";
 import { doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import MainSearch from "./search/MainSearch.jsx";
 
 function Home() {
   return (
@@ -33,6 +34,12 @@ function Message() {
         <SendMessageForm />
       </div>
     </div>
+  );
+}
+
+function Search() {
+  return (
+      <MainSearch />
   );
 }
 
@@ -147,6 +154,7 @@ function ProviderApp() {
           <Routes>
             <Route path="" element={<Home />} />
             <Route path="message" element={<Message />} />
+            <Route path="search" element={<Search />} />
           </Routes>
         </div>
       </section>

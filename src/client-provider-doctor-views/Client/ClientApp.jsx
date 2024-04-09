@@ -6,11 +6,11 @@ import Calender from "./homepage/calender.jsx";
 import MessageList from "./message/messageList.jsx";
 import SendMessageForm from "./message/sendMessageForm.jsx";
 import ChatBot from "./message/chatbot.jsx";
-import SearchDoctor from "./search/searchDoctor.jsx";
 import { useAuth } from "../../context/AuthContext.jsx";
 import { db } from "../../../firebase.js";
 import { doc, getDoc } from "firebase/firestore";
 import { useNavigate } from "react-router-dom";
+import MainSearch from "./search/MainSearch.jsx";
 
 function Home() {
   return (
@@ -53,10 +53,7 @@ function Chatbot() {
 
 function Search() {
   return (
-    <div className="search-bar">
-      <h1>Find your doctor here</h1>
-      <SearchDoctor />
-    </div>
+      <MainSearch />
   );
 }
 
