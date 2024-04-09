@@ -146,12 +146,16 @@ const SignupForm = () => {
             <option value="doctor">Doctor</option>
             <option value="insuranceProvider">Insurance Provider</option>
           </select>
-          <input
-            type="file"
-            name="profilePicture"
-            onChange={handleImageChange}
-            className="w-full p-4 border rounded-lg bg-gray-50 border-gray-300 focus:ring-[#747264] focus:border-[#747264]"
-          />
+          <div>
+            <label htmlFor="profilePicture">Profile Picture:</label>
+            <input
+              id="profilePicture"
+              type="file"
+              name="profilePicture"
+              onChange={handleImageChange}
+              className="w-full p-4 border rounded-lg bg-gray-50 border-gray-300 focus:ring-[#747264] focus:border-[#747264]"
+            />
+          </div>
 
           <button
             type="submit"

@@ -1,11 +1,15 @@
+import { validateCaptcha } from "react-simple-captcha";
+
 import React, { useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
+import CaptchaTest from "./CaptchaTest";
 
 const LoginForm = () => {
   const { signIn, resetPassword } = useAuth();
   const { enqueueSnackbar } = useSnackbar();
+  const [userCaptcha, setUserCaptcha] = useState("");
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -33,6 +37,14 @@ const LoginForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validateCaptcha(userCaptcha)) {
+      enqueueSnackbar(`CAPTCHA was incorrect`, {
+        variant: "error",
+      });
+      return;
+    }
+
     try {
       const userWithRole = await signIn(formData.email, formData.password);
       enqueueSnackbar("Successfully signed in!", { variant: "success" });
@@ -99,6 +111,10 @@ const LoginForm = () => {
             value={formData.password}
             className="w-full p-4 border rounded-lg bg-gray-50 border-gray-300 focus:ring-[#747264] focus:border-[#747264]"
             required
+          />
+          <CaptchaTest
+            setUserCaptcha={setUserCaptcha}
+            userCaptcha={userCaptcha}
           />
 
           <button

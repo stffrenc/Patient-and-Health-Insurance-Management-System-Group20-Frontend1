@@ -38,9 +38,7 @@ function Message() {
 }
 
 function Search() {
-  return (
-      <MainSearch />
-  );
+  return <MainSearch />;
 }
 
 function DoctorApp() {
@@ -141,7 +139,10 @@ function DoctorApp() {
               <h1 className="text-black ">Role: {userInfo.role}</h1>
             </div> */}
             <div className="h-10 w-20 rounded-lg bg-white flex items-center justify-center hover:bg-gray-300 cursor-pointer">
-              <button className="text-black" onClick={handleSignOut}>
+              <button
+                className="text-black font-semibold"
+                onClick={handleSignOut}
+              >
                 Logout
               </button>
             </div>

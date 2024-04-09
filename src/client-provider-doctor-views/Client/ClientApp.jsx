@@ -52,9 +52,7 @@ function Chatbot() {
 }
 
 function Search() {
-  return (
-      <MainSearch />
-  );
+  return <MainSearch />;
 }
 
 function ClientApp() {
@@ -143,7 +141,7 @@ function ClientApp() {
               onClick={() => navigate("/profile-details")}
               className="h-10 w-auto px-5  font-semibold   flex items-center justify-center rounded-lg bg-black  hover:cursor-pointer"
             >
-              <h1 className="text-white  text-center  ">
+              <h1 className="text-white   text-center  ">
                 Your Profile Details
               </h1>
             </div>
@@ -161,7 +159,10 @@ function ClientApp() {
               <h1 className="text-black ">Role: {userInfo.role}</h1>
             </div> */}
             <div className="h-10 w-20 rounded-lg bg-white flex items-center justify-center hover:bg-gray-300 cursor-pointer">
-              <button className="text-black" onClick={handleSignOut}>
+              <button
+                className="text-black font-semibold"
+                onClick={handleSignOut}
+              >
                 Logout
               </button>
             </div>
