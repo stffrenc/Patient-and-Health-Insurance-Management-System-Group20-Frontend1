@@ -6,20 +6,20 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import RegisterPage from "./components/ui/authUI/RegisterPage";
 import Navbar from "./components/ui/LandingPageUI/Navbar";
 import LoginPage from "./components/ui/authUI/LoginPage";
-import DoctorApp from "./client-provider-doctor-views/Doctor/DoctorApp";
-import ClientApp from "./client-provider-doctor-views/Client/ClientApp";
-import ProviderApp from "./client-provider-doctor-views/Provider/ProviderApp";
+import DoctorApp from "./user-views/Doctor/DoctorApp";
+import ClientApp from "./user-views/Client/ClientApp";
+import ProviderApp from "./user-views/Provider/ProviderApp";
 import { AuthContextProvider } from "./context/AuthContext";
-import SearchDoctorResults from "./client-provider-doctor-views/Client/search/searchDoctors/searchDoctorResults";
-import ViewDoctorProfile from "./client-provider-doctor-views/Client/search/searchDoctors/ViewDoctorProfile";
-import CovidQuestionnaire from "./client-provider-doctor-views/Client/search/searchDoctors/CovidQuestionnaire"
-import BookAppointment from "./client-provider-doctor-views/Client/search/searchDoctors/BookAppointment";
-import ViewResults from "./client-provider-doctor-views/Client/search/searchDoctors/ViewResults";
-import SearchDoctor from "./client-provider-doctor-views/Client/search/searchDoctors/searchDoctor";
-import SearchProvider from "./client-provider-doctor-views/Client/search/searchPlans/SearchProvider";
-import SearchProviderResults from "./client-provider-doctor-views/Client/search/searchPlans/SearchProviderResults";
-import ProviderProfile from "./client-provider-doctor-views/Client/search/searchPlans/ProviderProfile";
-import ViewInsurancePlans from "./client-provider-doctor-views/Client/search/searchPlans/ViewInsurancePlans";
+import SearchDoctorResults from "./user-views/Client/search/searchDoctors/searchDoctorResults";
+import ViewDoctorProfile from "./user-views/Client/search/searchDoctors/ViewDoctorProfile";
+import CovidQuestionnaire from "./user-views/Client/search/searchDoctors/CovidQuestionnaire"
+import BookAppointment from "./user-views/Client/search/searchDoctors/BookAppointment";
+import ViewResults from "./user-views/Client/search/searchDoctors/ViewResults";
+import SearchDoctor from "./user-views/Client/search/searchDoctors/searchDoctor";
+import SearchProvider from "./user-views/Client/search/searchPlans/SearchProvider";
+import SearchProviderResults from "./user-views/Client/search/searchPlans/SearchProviderResults";
+import ProviderProfile from "./user-views/Client/search/searchPlans/ProviderProfile";
+import ViewInsurancePlans from "./user-views/Client/search/searchPlans/ViewInsurancePlans";
 import UserDetails from "./components/ui/Profile/UserDetails";
 
 function App() {
