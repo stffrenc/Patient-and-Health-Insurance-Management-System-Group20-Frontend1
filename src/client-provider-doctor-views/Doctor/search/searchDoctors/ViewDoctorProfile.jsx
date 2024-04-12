@@ -18,7 +18,6 @@ function ViewDoctorProfile(){
     const profileDetails = async () => {
         try { 
           const response = await axios.post('http://localhost:8000/profile_details/', { doctor });
-            console.log("response",response)
         } catch (error) {
           console.error('Error:', error);
         }

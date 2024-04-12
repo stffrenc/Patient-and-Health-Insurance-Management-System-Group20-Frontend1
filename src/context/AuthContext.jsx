@@ -64,6 +64,16 @@ export const AuthContextProvider = ({ children }) => {
         photoURL: photoURL,
       });
 
+      const roleDocRef = doc(db,role, user.uid)
+      console.log("roleDocRef",roleDocRef);
+      await setDoc(roleDocRef, {
+        email: user.email,
+        username: username,
+        // role: role,
+        // theme: "default",
+        photoURL: photoURL,
+      });
+
       return user;
     } catch (error) {
       console.error("Error during user registration and data storage", error);

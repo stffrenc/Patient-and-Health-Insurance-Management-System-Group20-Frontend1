@@ -24,11 +24,11 @@ function DoctorProfile({ doctor }) {
     }
     return (
     <div className="search-results">
-        <img src={doctor.profile_picture} alt={doctor.name} />
+        <img src={doctor.photoURL} alt={doctor.fullName} />
         <div>
-        <p>{doctor.name}</p>
+        <p>{doctor.fullName}</p>
         <p>Specialization: {doctor.specialization}</p>
-        <p>Covid Support :{doctor.covid_support ? 'Yes' : 'No'}</p>
+        <p>Covid Support :{doctor.covidSupport ? 'Yes' : 'No'}</p>
         <button type="submit" onClick={viewDoctorProfile}>View My Profile</button>
         <button type="submit" onClick={bookAppointment}>Book An Appointment</button>
         </div>

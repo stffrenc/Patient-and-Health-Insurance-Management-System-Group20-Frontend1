@@ -30,7 +30,7 @@ function SearchDoctor() {
   const handleCovidSupportSearch = async() => {
     try {
       const response = await axios.post('http://localhost:8000/view_all_doctors/', { searchCovidSupport});
-      const covidSupportData = response?.data.filter(doctor => doctor.covid_support);
+      const covidSupportData = response?.data.filter(doctor => doctor.covidSupport);
       navigate('/search-doctor-results', { state: { results: covidSupportData } });
     } catch (error) {
       console.error('Error:', error);

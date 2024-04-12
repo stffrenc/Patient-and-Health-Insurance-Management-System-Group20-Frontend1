@@ -16,6 +16,10 @@ const UserDetails = () => {
     role: "",
     theme: "",
     photoURL: "",
+    fullName: "",
+    location: "",
+    covidSupport: false,
+    specialization: "",
   });
 
   useEffect(() => {
@@ -30,6 +34,11 @@ const UserDetails = () => {
               role: userDocSnap.data().role,
               theme: userDocSnap.data().theme,
               photoURL: userDocSnap.data().photoURL,
+              fullName: userDocSnap.data().name,
+              location: userDocSnap.data().location,
+              covidSupport: userDocSnap.data().covid_support,
+              specialization: userDocSnap.data().specialization,
+              // insurance: userDocSnap.data().insurance,
             });
           } else {
             console.log("No such document!");
@@ -66,8 +75,12 @@ const UserDetails = () => {
     e.preventDefault();
     try {
       // You'll need to ensure you have a document reference for the current user
-      const userDocRef = doc(db, "users", user.uid);
-      await updateDoc(userDocRef, {
+      // const userDocRef = doc(db, "users", user.uid);
+      // await updateDoc(userDocRef, {
+      //   ...userData,
+      // });
+      const roleDocRef = doc(db, userData.role , user.uid);
+      await updateDoc(roleDocRef, {
         ...userData,
       });
       enqueueSnackbar(`Profile succesfully updated`, {
@@ -80,6 +93,43 @@ const UserDetails = () => {
       });
     }
   };
+  const DoctorFormFields = () => (
+    <>
+    <input
+      type="fullName"
+      name="fullName"
+      placeholder="Your Full Name"
+      onChange={handleInputChange}
+      value={user && userData.fullName}
+      className="w-full p-4 border rounded-lg bg-gray-50 border-gray-300 focus:ring-[#747264] focus:border-[#747264]"
+      required
+    />
+      <input
+        type="location"
+        name="location"
+        placeholder="location"
+        onChange={handleInputChange}
+        value={user && userData.location}
+        className="w-full p-4 border rounded-lg bg-gray-50 border-gray-300 focus:ring-[#747264] focus:border-[#747264]"
+        required
+      />
+      <input
+        type="text"
+        name="specialization"
+        placeholder="Specialization"
+        onChange={handleInputChange}
+        value={userData.specialization}
+        className="w-full p-4 border rounded-lg bg-gray-50 border-gray-300 focus:ring-[#747264] focus:border-[#747264]"
+        required={userData.role === "doctor"}
+      />
+      <input
+        type="checkbox"
+        name="covidSupport"
+        onChange={e => setUserData({...userData, covidSupport: e.target.checked})}
+        checked={userData.covidSupport}
+      /> <label htmlFor="covidSupport"> Do you provide Covid Support?</label>
+    </>
+  );
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center">
@@ -156,6 +206,7 @@ const UserDetails = () => {
             <option value="doctor">Role: Doctor</option>
             <option value="insuranceProvider">Role: Insurance Provider</option>
           </select>
+          {userData.role === "doctor" && <DoctorFormFields />}
           <select
             name="theme"
             onChange={handleInputChange}

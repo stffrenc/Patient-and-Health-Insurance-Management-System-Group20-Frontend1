@@ -1,7 +1,14 @@
+import axios from 'axios';
 import './appointmentModal.css';
 function AppointmentModal({isOpen, onClose, onConfirm, formData}){
-    const handleConfirm = () =>{
-        onClose();
+    
+    const handleConfirm = async () => {
+        try { 
+            await axios.post('http://localhost:8000/send_appointment_email/', { formData });
+            onClose();
+        } catch (error) {
+        console.error('Error:', error);
+        }
     };
     return(         
         <div>
@@ -11,8 +18,8 @@ function AppointmentModal({isOpen, onClose, onConfirm, formData}){
                     <p>Thank you, You will be contacted before an appointment is offered.</p>
                 </label>
                 <div className="appointment-modal-actions">
-                    <button onClick={() => onConfirm(formData)}>Confirm</button>
-                    <button onClick={onClose} >Modify Appointment Schedule</button>
+                    <button onClick={handleConfirm}>Confirm</button>
+                    <button onClick={onClose} >Modify Schedule</button>
                 </div>
             </div>
             </div>

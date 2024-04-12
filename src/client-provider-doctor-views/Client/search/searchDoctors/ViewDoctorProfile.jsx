@@ -14,11 +14,9 @@ function ViewDoctorProfile(){
     const handleBookAppointment = () =>{
         setIsModalOpen(true);
     }
-
     const profileDetails = async () => {
         try { 
           const response = await axios.post('http://localhost:8000/profile_details/', { doctor });
-            console.log("response",response)
         } catch (error) {
           console.error('Error:', error);
         }
@@ -52,14 +50,17 @@ function ViewDoctorProfile(){
                 <div className="profile-description">
                 {doctor && (
                         <>
-                            <h1 className="subtitle">{doctor.name}</h1>
+                            <img src={doctor.photoURL} alt={doctor.fullName} />
+                            <h1 className="subtitle">{doctor.fullName}</h1>
                             <p>{doctor.specialization}</p>
-                            <p>5 out of 5 stars (40 reviews)</p>
-                            <p>Accepting new patients</p>
+                            
                         </>
                     )}
                 </div>
                 <div className="apointment-section">
+                    <p>5 out of 5 stars (40 reviews)</p>
+                    <p>Accepting new patients</p>
+                    <p>Provides Covid Support: {doctor.covidSupport ? 'Yes':'No'}</p>
                     <button type="submit" onClick={handleBookAppointment}>Book An Appointment</button>
                 </div>
             </div>
@@ -75,14 +76,13 @@ function ViewDoctorProfile(){
                 <div className="tab-contents active-tab" id="insurance">
                         <div className="detail-chart">
                             <h3>Accepted Insurance plans are: </h3>
-                            { doctor.insurance.map((plan,index)=>(
-                                <li key={index} className='insurance-plan'>{plan}</li>
-                            ))}
+                            <p>Aetna</p>
+                            <p>Anthem</p>
                         </div>
                 </div>   
                 <div className="tab-contents" id="location">
                         <div className="detail-chart">
-                            <h3>Location</h3>
+                            {/* <h3>Location</h3> */}
                             <p>{ doctor.location }</p>
                         </div>
                 </div> 
