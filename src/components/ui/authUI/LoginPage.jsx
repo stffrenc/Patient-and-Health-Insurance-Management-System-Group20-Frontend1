@@ -1,11 +1,15 @@
+import { validateCaptcha } from "react-simple-captcha";
+
 import React, { useState } from "react";
 import { useAuth } from "../../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
+import CaptchaTest from "./CaptchaTest";
 
 const LoginForm = () => {
-  const { signIn } = useAuth();
+  const { signIn, resetPassword } = useAuth();
   const { enqueueSnackbar } = useSnackbar();
+  const [userCaptcha, setUserCaptcha] = useState("");
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -13,12 +17,34 @@ const LoginForm = () => {
     password: "",
   });
 
+  const handleResetPassword = async (e) => {
+    e.preventDefault();
+    try {
+      await resetPassword(formData.email);
+      enqueueSnackbar("Check your email for password reset instructions", {
+        variant: "success",
+      });
+    } catch (error) {
+      enqueueSnackbar(`Failed to reset password: ${error.message}`, {
+        variant: "error",
+      });
+    }
+  };
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!validateCaptcha(userCaptcha)) {
+      enqueueSnackbar(`CAPTCHA was incorrect`, {
+        variant: "error",
+      });
+      return;
+    }
+
     try {
       const userWithRole = await signIn(formData.email, formData.password);
       enqueueSnackbar("Successfully signed in!", { variant: "success" });
@@ -57,6 +83,15 @@ const LoginForm = () => {
               Register
             </a>
           </p>
+          <p className="text-gray-600">
+            Forgot your password?{" "}
+            <a
+              onClick={handleResetPassword}
+              className="text-[#747264] hover:underline hover:cursor-pointer"
+            >
+              Reset Your Password
+            </a>
+          </p>
         </div>
         <form onSubmit={handleSubmit} className="space-y-6">
           <input
@@ -76,6 +111,10 @@ const LoginForm = () => {
             value={formData.password}
             className="w-full p-4 border rounded-lg bg-gray-50 border-gray-300 focus:ring-[#747264] focus:border-[#747264]"
             required
+          />
+          <CaptchaTest
+            setUserCaptcha={setUserCaptcha}
+            userCaptcha={userCaptcha}
           />
 
           <button

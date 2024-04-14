@@ -4,6 +4,7 @@ import {
   signOut,
   onAuthStateChanged,
   createUserWithEmailAndPassword,
+  sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth, db } from "../../firebase";
 import {
@@ -44,7 +45,7 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
-  const registerUser = async (email, password, role, username) => {
+  const registerUser = async (email, password, role, username, photoURL) => {
     try {
       const userCredential = await createUserWithEmailAndPassword(
         auth,
@@ -59,11 +60,34 @@ export const AuthContextProvider = ({ children }) => {
         username: username,
         lastSignIn: serverTimestamp(),
         role: role,
+        theme: "default",
+        photoURL: photoURL,
+      });
+
+      const roleDocRef = doc(db,role, user.uid)
+      console.log("roleDocRef",roleDocRef);
+      await setDoc(roleDocRef, {
+        email: user.email,
+        username: username,
+        // role: role,
+        // theme: "default",
+        photoURL: photoURL,
       });
 
       return user;
     } catch (error) {
       console.error("Error during user registration and data storage", error);
+      throw error;
+    }
+  };
+
+  const resetPassword = async (email) => {
+    try {
+      await sendPasswordResetEmail(auth, email);
+
+      console.log("Password reset email sent successfully");
+    } catch (error) {
+      console.error("Error sending password reset email:", error);
       throw error;
     }
   };
@@ -80,7 +104,9 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, registerUser, logOut, signIn }}>
+    <AuthContext.Provider
+      value={{ user, registerUser, logOut, signIn, resetPassword }}
+    >
       {children}
     </AuthContext.Provider>
   );
