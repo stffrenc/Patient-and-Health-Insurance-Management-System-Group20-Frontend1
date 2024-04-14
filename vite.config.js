@@ -9,3 +9,4 @@ export default defineConfig({
     outDir: 'dist',  // This should match the directory name Render is expecting
   }
 })
+
