@@ -5,4 +5,8 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   base: '/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/',
   plugins: [react()],
+  build: {
+    outDir: 'dist',
+  }
 })
+
