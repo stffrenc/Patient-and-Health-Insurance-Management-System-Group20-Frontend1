@@ -23,10 +23,10 @@ function ViewDoctorProfile(){
       };
     const confirmBookAppointment = (isChecked) => {
         if(isChecked){
-            navigate('/covid-questionnaire',{ state: {covidQuestionnaire: true}});
+            navigate('/covid-questionnaire',{ state: {covidQuestionnaire: true,  doctor:doctor}});
         }
         else{
-            navigate('/book-appointment',{ state: {covidQuestionnaire: false}});
+            navigate('/book-appointment',{ state: {covidQuestionnaire: false,  doctor:doctor}});
         }
     }
 

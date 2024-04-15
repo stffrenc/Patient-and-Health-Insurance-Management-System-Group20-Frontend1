@@ -15,7 +15,7 @@ function DoctorProfile({ doctor }) {
     }
     const bookAppointment = async() => {
         try{
-            navigate('/book-appointment',{});
+            navigate('/book-appointment',{state: { doctor }});
 
         }
         catch(error){

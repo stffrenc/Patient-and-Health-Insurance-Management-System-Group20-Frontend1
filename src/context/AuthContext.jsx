@@ -65,7 +65,6 @@ export const AuthContextProvider = ({ children }) => {
       });
 
       const roleDocRef = doc(db,role, user.uid)
-      console.log("roleDocRef",roleDocRef);
       await setDoc(roleDocRef, {
         email: user.email,
         username: username,

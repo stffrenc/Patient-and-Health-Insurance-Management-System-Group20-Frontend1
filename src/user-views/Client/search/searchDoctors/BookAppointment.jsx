@@ -6,6 +6,7 @@ import AppointmentModal from "./AppointmentModal";
 function BookAppointment(){
     const navigate = useNavigate(); 
     const location = useLocation();
+    const doctor = location.state ? location.state.doctor : null;
     const [formData, setFormData] = useState({
         patient:'',
         patientFirstName:'',
@@ -21,10 +22,10 @@ function BookAppointment(){
 
     const confirmAppointmentRequest = (isChecked) => {
         if(isChecked){
-            navigate('/covid-questionnaire',{ state: {covidQuestionnaire: true}});
+            navigate('/covid-questionnaire',{ state: {covidQuestionnaire: false, doctor:doctor}});
         }
         else{
-            navigate('/book-appointment',{ state: {covidQuestionnaire: false}});
+            navigate('/book-appointment',{ state: {covidQuestionnaire: false, doctor:doctor}});
         }
     }
     const handleChange = (e) =>{
@@ -82,6 +83,7 @@ function BookAppointment(){
                     onClose={() => setIsModalOpen(false)}
                     onConfirm={confirmAppointmentRequest}
                     formData={formData}
+                    doctor = {doctor}
                 />
             )}
         

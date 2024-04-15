@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate, useLocation } from 'react-router';
 import './covidQuestionnaire.css';
 
 function CovidQuestionnaire(){
     const navigate = useNavigate(); 
+    const location = useLocation();
     const [formData, setFormData] = useState({
         symptoms: '',
         positiveTest: '',
@@ -14,6 +15,7 @@ function CovidQuestionnaire(){
         higherRisk: '',
         higherRiskExplanation: ''
     });
+    const doctor = location.state.doctor;
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setFormData({ ...formData, [name]: value });
@@ -30,11 +32,15 @@ function CovidQuestionnaire(){
                 body: JSON.stringify(formData)
             });
 
-            if (!response.ok) {
+            if (response.ok) {
+                navigate('/book-appointment', {
+                    state: {
+                        covidQuestionnaire: true,
+                        doctor: doctor 
+                    }
+                });
+            } else {
                 throw new Error('Failed to submit form data');
-            }
-            else{
-                navigate('/book-appointment',{});
             }
         } catch (error) {
             console.error('Error:', error);
