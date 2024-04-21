@@ -12,30 +12,33 @@ const StatCard = ({ icon, number, description }) => (
   </div>
 );
 
+//bg-[#747264]
 const WhySection = () => {
   return (
-    <div className="py-[70px]  bg-[#747264]">
-      <h2 className="text-3xl text-center font-bold mb-8">Why Mediapp ?</h2>
+    <div className="py-[70px]    bg-gray-700">
+      <h2 className="text-3xl text-center font-extrabold tracking-tight leading-none  text-white mb-8">
+        Why Mediapp ?
+      </h2>
       <div className="flex justify-center space-x-4">
         <StatCard
           icon="👥"
-          number="2700 K"
+          number="270,000"
           description="Lives covered since inception"
         />
         <StatCard
           icon="🏥"
-          number="1300 +"
+          number="1300+"
           description="Network Hospitals across the US"
         />
         <StatCard
           icon="⭐"
-          number="4 Rating"
+          number="4.8 Star Rating"
           description="Based on 8050 User reviews"
         />
         <StatCard
           icon="🛡️"
-          number="90 %"
-          description="Cashless claims settled in 1 hour"
+          number="98%"
+          description="Patients found the right provider"
         />
       </div>
     </div>

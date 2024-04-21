@@ -3,7 +3,8 @@ import React, { useState } from "react";
 const faqs = [
   {
     question: "What does MediApp do?",
-    answer: "MediApp matches Doctors with patients with insurers",
+    answer:
+      "The short answer is MediApp matches Doctors with patients with insurers. But we do much more, from personalized recomendations to chatbots, MediApp has you covered for all your needs!",
   },
   {
     question: "How can patients get matched with insurers?",
@@ -24,8 +25,10 @@ const FAQ = () => {
   };
 
   return (
-    <div className="p-8">
-      <h2 className="text-2xl font-bold mb-4">Frequently Asked Questions</h2>
+    <div className="p-[60px]  tracking-tight leading-none  text-white bg-gray-900">
+      <h2 className="text-2xl  mb-4 font-extrabold tracking-tight leading-none  text-white">
+        Frequently Asked Questions
+      </h2>
       <div className="space-y-2">
         {faqs.map((faq, index) => (
           <div key={index} className="border-b">
@@ -37,7 +40,9 @@ const FAQ = () => {
               <span>{activeIndex === index ? "▼" : "►"}</span>
             </button>
             {activeIndex === index && (
-              <div className="pb-3 text-gray-700">{faq.answer}</div>
+              <div className="pb-3  tracking-tight leading-none  text-gray-400">
+                {faq.answer}
+              </div>
             )}
           </div>
         ))}

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { auth } from "../../../../firebase";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  sendSignInLinkToEmail,
+} from "firebase/auth";
 import { useSnackbar } from "notistack";
 import { useNavigate } from "react-router-dom";
 import { db, getStorageRef } from "../../../../firebase";
@@ -37,11 +40,6 @@ const SignupForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (formData.password !== formData.confirmPassword) {
-      setError("Passwords do not match.");
-      return;
-    }
-
     let photoURL;
     if (file) {
       const fileRef = getStorageRef(`profilePictures/${file.name}`);
@@ -49,33 +47,71 @@ const SignupForm = () => {
       photoURL = await getDownloadURL(snapshot.ref);
     }
 
+    const actionCodeSettings = {
+      url: "http://localhost:5173/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/doctor", // URL to redirect back to after email verification
+      handleCodeInApp: true, // This must be true to handle the sign-in link in the app
+    };
+
     try {
       setError(null);
+      await sendSignInLinkToEmail(auth, formData.email, actionCodeSettings);
+      window.localStorage.setItem("emailForSignIn", formData.email);
+      window.localStorage.setItem("photoURL", photoURL);
+      window.localStorage.setItem("username", formData.username);
+      window.localStorage.setItem("role", formData.role);
 
-      await registerUser(
-        formData.email,
-        formData.password,
-        formData.role,
-        formData.username,
-        photoURL ? photoURL : ""
-      );
-
-      enqueueSnackbar(`User succesfully created!`, {
+      enqueueSnackbar("Check your email for the sign-in link", {
         variant: "success",
       });
 
-      if (formData.role === "patient") {
-        navigate("/client");
-      } else if (formData.role === "doctor") {
-        navigate("/doctor");
-      } else if (formData.role === "insuranceProvider") {
-        navigate("/provider");
-      }
+      // You might want to navigate to a different route or show a message
     } catch (error) {
       enqueueSnackbar(`Error: ${error.message}`, { variant: "error" });
       setError(error.message);
     }
   };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (formData.password !== formData.confirmPassword) {
+  //     setError("Passwords do not match.");
+  //     return;
+  //   }
+
+  //   let photoURL;
+  //   if (file) {
+  //     const fileRef = getStorageRef(`profilePictures/${file.name}`);
+  //     const snapshot = await uploadBytes(fileRef, file);
+  //     photoURL = await getDownloadURL(snapshot.ref);
+  //   }
+
+  //   try {
+  //     setError(null);
+
+  //     await registerUser(
+  //       formData.email,
+  //       formData.password,
+  //       formData.role,
+  //       formData.username,
+  //       photoURL ? photoURL : ""
+  //     );
+
+  //     enqueueSnackbar(`User succesfully created!`, {
+  //       variant: "success",
+  //     });
+
+  //     if (formData.role === "patient") {
+  //       navigate("/client");
+  //     } else if (formData.role === "doctor") {
+  //       navigate("/doctor");
+  //     } else if (formData.role === "insuranceProvider") {
+  //       navigate("/provider");
+  //     }
+  //   } catch (error) {
+  //     enqueueSnackbar(`Error: ${error.message}`, { variant: "error" });
+  //     setError(error.message);
+  //   }
+  // };
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center">

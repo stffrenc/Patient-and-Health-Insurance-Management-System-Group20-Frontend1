@@ -51,11 +51,11 @@ const UserDetails = () => {
     fetchUserInfo();
   }, [user]);
 
-  useEffect(() => {
-    if (!user) {
-      navigate("/login");
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (!user) {
+  //     navigate("/login");
+  //   }
+  // }, [user]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -79,7 +79,7 @@ const UserDetails = () => {
       // await updateDoc(userDocRef, {
       //   ...userData,
       // });
-      const roleDocRef = doc(db, userData.role , user.uid);
+      const roleDocRef = doc(db, userData.role, user.uid);
       await updateDoc(roleDocRef, {
         ...userData,
       });
@@ -93,43 +93,6 @@ const UserDetails = () => {
       });
     }
   };
-  const DoctorFormFields = () => (
-    <>
-    <input
-      type="fullName"
-      name="fullName"
-      placeholder="Your Full Name"
-      onChange={handleInputChange}
-      value={user && userData.fullName}
-      className="w-full p-4 border rounded-lg bg-gray-50 border-gray-300 focus:ring-[#747264] focus:border-[#747264]"
-      required
-    />
-      <input
-        type="location"
-        name="location"
-        placeholder="location"
-        onChange={handleInputChange}
-        value={user && userData.location}
-        className="w-full p-4 border rounded-lg bg-gray-50 border-gray-300 focus:ring-[#747264] focus:border-[#747264]"
-        required
-      />
-      <input
-        type="text"
-        name="specialization"
-        placeholder="Specialization"
-        onChange={handleInputChange}
-        value={userData.specialization}
-        className="w-full p-4 border rounded-lg bg-gray-50 border-gray-300 focus:ring-[#747264] focus:border-[#747264]"
-        required={userData.role === "doctor"}
-      />
-      <input
-        type="checkbox"
-        name="covidSupport"
-        onChange={e => setUserData({...userData, covidSupport: e.target.checked})}
-        checked={userData.covidSupport}
-      /> <label htmlFor="covidSupport"> Do you provide Covid Support?</label>
-    </>
-  );
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col justify-center items-center">
@@ -206,7 +169,49 @@ const UserDetails = () => {
             <option value="doctor">Role: Doctor</option>
             <option value="insuranceProvider">Role: Insurance Provider</option>
           </select>
-          {userData.role === "doctor" && <DoctorFormFields />}
+          {userData.role === "doctor" && (
+            <>
+              <input
+                type="fullName"
+                name="fullName"
+                placeholder="Your Full Name"
+                onChange={handleInputChange}
+                value={user && userData.fullName}
+                className="w-full p-4 border rounded-lg bg-gray-50 border-gray-300 focus:ring-[#747264] focus:border-[#747264]"
+                required
+              />
+              <input
+                type="location"
+                name="location"
+                placeholder="location"
+                onChange={handleInputChange}
+                value={user && userData.location}
+                className="w-full p-4 border rounded-lg bg-gray-50 border-gray-300 focus:ring-[#747264] focus:border-[#747264]"
+                required
+              />
+              <input
+                type="text"
+                name="specialization"
+                placeholder="Specialization"
+                onChange={handleInputChange}
+                value={userData.specialization}
+                className="w-full p-4 border rounded-lg bg-gray-50 border-gray-300 focus:ring-[#747264] focus:border-[#747264]"
+                required={userData.role === "doctor"}
+              />
+              <input
+                type="checkbox"
+                name="covidSupport"
+                onChange={(e) =>
+                  setUserData({ ...userData, covidSupport: e.target.checked })
+                }
+                checked={userData.covidSupport}
+              />{" "}
+              <label htmlFor="covidSupport">
+                {" "}
+                Do you provide Covid Support?
+              </label>
+            </>
+          )}
           <select
             name="theme"
             onChange={handleInputChange}
@@ -232,5 +237,9 @@ const UserDetails = () => {
     </div>
   );
 };
+
+// const DoctorFormFields = () => (
+
+// );
 
 export default UserDetails;
