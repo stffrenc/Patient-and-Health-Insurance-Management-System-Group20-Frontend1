@@ -29,24 +29,24 @@ function App() {
         <SnackbarProvider>
           <Router>
             <Routes>
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/register" element={<RegisterPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/doctor/*" element={<DoctorApp />} />
-              <Route path="/client/*" element={<ClientApp />} />
-              <Route path="/provider/*" element={<ProviderApp />}></Route>
-              <Route path="/search-doctor" element={<SearchDoctor />} />
-              <Route path="/search-provider" element={<SearchProvider />} />
-              <Route path="/search-doctor-results" element={<SearchDoctorResults />} />
-              <Route path="/view-doctor-profile" element={<ViewDoctorProfile />} />
-              <Route path="/view-all-doctors" element={<ViewResults />} />
-              <Route path="/book-appointment" element = {<BookAppointment />} />
-              <Route path="/search-by-condition" element={<SearchDoctorResults />} />
-              <Route path="/covid-questionnaire" element={<CovidQuestionnaire />} />
-              <Route path="/view-provider-profile" element={<SearchProviderResults />} />
-              <Route path="/search-provider-results" element={<SearchProviderResults />} />
-              <Route path="/view-insurance-plans" element={<ViewInsurancePlans />}></Route>
-              <Route path="/profile-details" element={<UserDetails />}></Route>
+              <Route path="/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/" element={<LandingPage />} />
+              <Route path="/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/register" element={<RegisterPage />} />
+              <Route path="/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/login" element={<LoginPage />} />
+              <Route path="/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/doctor/*" element={<DoctorApp />} />
+              <Route path="/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/client/*" element={<ClientApp />} />
+              <Route path="/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/provider/*" element={<ProviderApp />}></Route>
+              <Route path="/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/search-doctor" element={<SearchDoctor />} />
+              <Route path="/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/search-provider" element={<SearchProvider />} />
+              <Route path="/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/search-doctor-results" element={<SearchDoctorResults />} />
+              <Route path="/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/view-doctor-profile" element={<ViewDoctorProfile />} />
+              <Route path="/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/view-all-doctors" element={<ViewResults />} />
+              <Route path="/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/book-appointment" element = {<BookAppointment />} />
+              <Route path="/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/search-by-condition" element={<SearchDoctorResults />} />
+              <Route path="/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/covid-questionnaire" element={<CovidQuestionnaire />} />
+              <Route path="/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/view-provider-profile" element={<SearchProviderResults />} />
+              <Route path="/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/search-provider-results" element={<SearchProviderResults />} />
+              <Route path="/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/view-insurance-plans" element={<ViewInsurancePlans />}></Route>
+              <Route path="/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/profile-details" element={<UserDetails />}></Route>
             </Routes>
           </Router>
         </SnackbarProvider>

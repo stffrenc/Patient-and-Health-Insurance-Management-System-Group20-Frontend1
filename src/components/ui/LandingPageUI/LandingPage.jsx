@@ -9,7 +9,7 @@ const LandingPage = () => {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate("/register");
+    navigate("/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/register");
   };
 
   return (

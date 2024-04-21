@@ -65,11 +65,11 @@ const SignupForm = () => {
       });
 
       if (formData.role === "patient") {
-        navigate("/client");
+        navigate("/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/client");
       } else if (formData.role === "doctor") {
-        navigate("/doctor");
+        navigate("/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/doctor");
       } else if (formData.role === "insuranceProvider") {
-        navigate("/provider");
+        navigate("/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/provider");
       }
     } catch (error) {
       enqueueSnackbar(`Error: ${error.message}`, { variant: "error" });

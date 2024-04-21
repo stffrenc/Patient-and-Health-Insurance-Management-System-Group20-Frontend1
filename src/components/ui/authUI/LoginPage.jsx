@@ -51,13 +51,13 @@ const LoginForm = () => {
 
       switch (userWithRole.role) {
         case "doctor":
-          navigate("/doctor");
+          navigate("/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/doctor");
           break;
         case "patient":
-          navigate("/client");
+          navigate("/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/client");
           break;
         case "insuranceProvider":
-          navigate("/provider");
+          navigate("/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/provider");
           break;
       }
     } catch (error) {
@@ -79,7 +79,7 @@ const LoginForm = () => {
           </h2>
           <p className="text-gray-600">
             Need to make an account?{" "}
-            <a href="/register" className="text-[#747264] hover:underline">
+            <a href="/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/register" className="text-[#747264] hover:underline">
               Register
             </a>
           </p>
