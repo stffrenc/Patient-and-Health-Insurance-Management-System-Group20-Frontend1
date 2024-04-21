@@ -47,6 +47,7 @@ function App() {
               <Route path="/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/search-provider-results" element={<SearchProviderResults />} />
               <Route path="/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/view-insurance-plans" element={<ViewInsurancePlans />}></Route>
               <Route path="/Patient-and-Health-Insurance-Management-System-Group20-Frontend1/profile-details" element={<UserDetails />}></Route>
+              <Route path = "*" element={<LandingPage />} />
             </Routes>
           </Router>
         </SnackbarProvider>
